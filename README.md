@@ -21,14 +21,15 @@ implemented here http://norvig.com/lispy.html
     >
 
 ## TODO
-### Complete numerous functions
-#### Add
-#### Subtract
-#### Multiply
-#### Divide
-#### Apply (map?)
-#### Etc (see list in standard_env from the link
-### Add Tests
-### Easier to run repl (should be able to do it from command line)
-### Way to exit repl (exit?)
-### Make more "ruby" like (class maybe :) )
+* Complete numerous functions
+    * Add
+    * Subtract
+    * Multiply
+    * Divide
+    * Apply (map?)
+    * Etc (see list in standard_env from the link
+
+* Add Tests
+* Easier to run repl (should be able to do it from command line)
+* Way to exit repl (exit?)
+* Make more "ruby" like (class maybe :) )
