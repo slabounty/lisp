@@ -6,30 +6,37 @@ A simple list interpreter based on the python interpreter
 implemented here http://norvig.com/lispy.html
 
 ## Installation
-    git clone https://github.com/slabounty/lisp
 
-## Running 
-    # pry
-    [1] pry(main)> require_relative 'lisp'
-    [2] pry(main)> repl
-    > (define l (list a b c))
-    (a b c)
-    > (car l)
-    a
-    > (cdr l)
-    (b c)
-    >
+Add this line to your application's Gemfile:
 
-## TODO
-* Complete numerous functions
-    * Add
-    * Subtract
-    * Multiply
-    * Divide
-    * Apply (map?)
-    * Etc (see list in standard_env from the link
+```ruby
+gem 'lisp'
+```
 
-* Add Tests
-* Easier to run repl (should be able to do it from command line)
-* Way to exit repl (exit?)
-* Make more "ruby" like (class maybe :) )
+And then execute:
+
+    $ bundle
+
+Or install it yourself as:
+
+    $ gem install lisp
+
+## Usage
+
+TODO: Write usage instructions here
+
+## Development
+
+After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+
+To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+
+## Contributing
+
+Bug reports and pull requests are welcome on GitHub at https://github.com/slabounty/lisp. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+
+
+## License
+
+The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
+
