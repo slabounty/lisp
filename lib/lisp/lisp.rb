@@ -51,10 +51,25 @@ module Lisp
           car: lambda { |l| l[0] },
           cdr: lambda { |l| l[1..-1] },
           list: lambda { |*l| l },
+          list?: lambda { |l| l.is_a? Array },
+
+          '+': lambda { |l1, l2| l1 + l2 },
           add: lambda { |l1, l2| l1 + l2 },
+
           multiply: lambda { |l1, l2| l1 * l2 },
+          '*': lambda { |l1, l2| l1 * l2 },
+
           subtract: lambda { |l1, l2| l1 - l2 },
+          '-': lambda { |l1, l2| l1 - l2 },
+
           divide: lambda { |l1, l2| l1 / l2 },
+          '/': lambda { |l1, l2| l1 / l2 },
+
+          '>': lambda { |l1, l2| l1 > l2 },
+          '<': lambda { |l1, l2| l1 < l2 },
+          '>=': lambda { |l1, l2| l1 >= l2 },
+          '<=': lambda { |l1, l2| l1 <= l2 },
+          '=': lambda { |l1, l2| l1 == l2 },
         }
     end
 
