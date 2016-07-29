@@ -89,6 +89,10 @@ module Lisp
         var = x[1]
         exp = x[2]
         env[var] = lisp_eval(exp, env)
+      elsif x[0] == :exit
+        :exit
+      elsif x[0] == :quit
+        :exit
       else                          # (proc arg...)
         p = lisp_eval(x[0], env)
         args = x[1..-1].map { |arg| lisp_eval(arg, env) }
@@ -97,10 +101,12 @@ module Lisp
     end
 
     def repl(prompt = '> ')
-      while true
+      begin
         val = lisp_eval(parse(raw_input(prompt)))
         puts schemestr(val)
-      end
+      rescue => e
+        puts "Error: #{e}"
+      end while val != :exit
     end
 
     def raw_input(prompt)
