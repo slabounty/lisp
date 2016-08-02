@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Lisp::Lisp do
+describe Lisp::Parser do
   subject { described_class.new }
 
   describe "#tokenize" do
@@ -20,7 +20,7 @@ describe Lisp::Lisp do
   describe "#read_from_tokens" do
     context "when the tokens are empty" do
       it "raises a lisp syntax exception" do
-        expect { subject.read_from_tokens([]) }.to raise_exception Lisp::Lisp::LispSyntaxError
+        expect { subject.read_from_tokens([]) }.to raise_exception Lisp::Parser::LispSyntaxError
       end
     end
 
@@ -31,7 +31,7 @@ describe Lisp::Lisp do
 
     context "when the tokens start with a ')'" do
       it "raises a lisp syntax exception" do
-        expect { subject.read_from_tokens([')', 'hello', 'world']) }.to raise_exception Lisp::Lisp::LispSyntaxError
+        expect { subject.read_from_tokens([')', 'hello', 'world']) }.to raise_exception Lisp::Parser::LispSyntaxError
       end
     end
 
