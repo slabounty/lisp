@@ -13,8 +13,8 @@ module Lisp
           length: lambda { |l| l.length },
 
           abs: lambda { |x| x.abs },
-          min: lambda { |l1, l2| [l1, l2].min },
-          max: lambda { |l1, l2| [l1, l2].max },
+          min: lambda { |l| l.min },
+          max: lambda { |l| l.max },
 
           '+': lambda { |l1, l2| l1 + l2 },
           add: lambda { |l1, l2| l1 + l2 },
