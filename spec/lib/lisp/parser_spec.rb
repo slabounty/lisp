@@ -5,8 +5,23 @@ describe Lisp::Parser do
 
   describe "#tokenize" do
     let(:program) { "(begin (define r 10) (* pi (* r r)))" }
+
     it "tokenizes the program into an array of strings" do
       expect(subject.tokenize(program)).to eq(["(", "begin", "(", "define", "r", "10", ")", "(", "*", "pi", "(", "*", "r", "r", ")", ")", ")"])
+    end
+
+    context "when the program has quoted strings" do
+      let(:program) { '(list "hello world" "good" "bye")' }
+      it "keeps them as a single token" do
+        expect(subject.tokenize(program)).to eq([
+          "(",
+          "list",
+          '"hello world"',
+          '"good"',
+          '"bye"',
+          ")"
+        ])
+      end
     end
   end
 
@@ -45,9 +60,21 @@ describe Lisp::Parser do
   end
 
   describe "#atom" do
+    context "when the token is a quoted string" do
+      it "returns the string" do
+        expect(subject.atom('"hello"')).to eq("hello")
+      end
+    end
+
+    context "when the token is a quoted string has spaces" do
+      it "returns the string" do
+        expect(subject.atom('"hello world"')).to eq("hello world")
+      end
+    end
+
     context "when the token is an integer" do
       it "returns the integer" do
-        expect(subject.atom(-42)).to eq(-42)
+        expect(subject.atom("-42")).to eq(-42)
       end
     end
 
