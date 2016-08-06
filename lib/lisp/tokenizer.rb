@@ -19,7 +19,9 @@ module Lisp
     end
 
     def get_token
-      replinish_tokens if tokens == []
+      while tokens == []
+        replinish_tokens
+      end
       tokens.shift
     end
 
