@@ -17,20 +17,6 @@ describe Lisp::Lisp do
     end
   end
 
-  describe "#read_s_expr" do
-    it "reads a simple expression" do
-      allow(input).to receive(:getc)
-        .and_return('(', '+', ' ', '3', ' ', '4', ')')
-      expect(subject.read_s_expr).to eq("(+ 3 4)")
-    end
-
-    it "reads expressions with line returns in them correctly" do
-      allow(input).to receive(:getc)
-        .and_return('(', '+', "\n", '3', "\n", '4', ' ', ')')
-      expect(subject.read_s_expr).to eq("(+ 3 4 )")
-    end
-  end
-
   describe "#schemestr" do
     context "when the expression is an array" do
       it "prints it as a list" do

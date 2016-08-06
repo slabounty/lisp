@@ -9,12 +9,12 @@ module Lisp
     end
 
     def repl
-      parser = Parser.new
-      evaluator = Evaluator.new
-
       begin
         print_prompt
-        val = evaluator.lisp_eval(parser.parse(read_s_expr))
+        val = evaluator
+          .lisp_eval(
+            parser.parse(
+              tokenizer.read_s_expr))
         output.puts schemestr(val)
       rescue => e
         output.puts "Error: #{e}"
@@ -22,22 +22,20 @@ module Lisp
       end while val != :exit
     end
 
-    def print_prompt
-      output.print prompt
+    def parser
+      @parser ||= Parser.new
     end
 
-    def read_s_expr
-      s_expr = ""
-      paren_count = 0
+    def evaluator
+      @evaluator ||= Evaluator.new
+    end
 
-      begin
-        c = input.getc
-        s_expr << ((c != "\n") ? c : " ")
-        paren_count += 1 if c == '('
-        paren_count -= 1 if c == ')'
-      end while (paren_count != 0) || s_expr =~ /^\s*$/
+    def tokenizer
+      @tokenizer ||= Tokenizer.new(input)
+    end
 
-      return s_expr
+    def print_prompt
+      output.print prompt
     end
 
     def schemestr(exp)
