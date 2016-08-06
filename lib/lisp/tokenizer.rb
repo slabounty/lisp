@@ -13,7 +13,7 @@ module Lisp
         s_expr << token
         paren_count += 1 if token == '('
         paren_count -= 1 if token == ')'
-      end while (paren_count != 0) # || s_expr =~ /^\s*$/
+      end while (paren_count != 0)
 
       return s_expr
     end
@@ -40,4 +40,3 @@ module Lisp
     attr_reader :input
   end
 end
-
