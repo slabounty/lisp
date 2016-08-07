@@ -3,7 +3,6 @@ module Lisp
     class LispSyntaxError < StandardError; end
 
     def parse(tokenized_program)
-      # "Read a Scheme expression from a string."
       read_from_tokens(tokenized_program)
     end
 
@@ -12,21 +11,27 @@ module Lisp
       fail LispSyntaxError, 'unexpected EOF while reading' if tokens.length == 0
 
       token = tokens.shift
-      if '(' == token
-        l = []
-        while tokens[0] != ')'
-          l << read_from_tokens(tokens)
-        end
-        tokens.shift # pop off ')'
-        return l
-      elsif ')' == token
+      case token
+      when '('
+        return build_list(tokens)
+      when ')'
         fail LispSyntaxError, 'unexpected )'
       else
-        return atom(token)
+        return build_atom(token)
       end
     end
 
-    def atom(token)
+    def build_list(tokens)
+      l = []
+      while tokens[0] != ')'
+        l << read_from_tokens(tokens)
+      end
+      tokens.shift # pop off ')'
+
+      return l
+    end
+
+    def build_atom(token)
       # Stings become strings
       # Numbers become numbers; 
       # every other token is a symbol.

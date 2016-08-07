@@ -28,18 +28,6 @@ describe Lisp::Evaluator do
       end
     end
 
-    context "when the value is :exit" do
-      it "returns exit" do
-        expect(subject.lisp_eval([:exit], env)).to eq(:exit)
-      end
-    end 
-
-    context "when the value is :quit" do
-      it "returns exit" do
-        expect(subject.lisp_eval([:quit], env)).to eq(:exit)
-      end
-    end
-
     context "when the first element is lambda" do
       let(:procedure) { [:lambda, :parms, :body] }
 

@@ -38,6 +38,9 @@ module Lisp
           equal?: lambda { |l1, l2| l1 == l2 },
           empty?: lambda { |l| l == [] },
           null?: lambda { |l| l == [] },
+
+          exit: lambda { exit },
+          quit: lambda { exit },
         }
       )
     end

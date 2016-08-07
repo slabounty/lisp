@@ -20,12 +20,7 @@ module Lisp
         var = x[1]
         exp = x[2]
         env[var] = lisp_eval(exp, env)
-      elsif x[0] == :exit
-        :exit
-      elsif x[0] == :quit
-        :exit
       elsif x[0] == :lambda         # procedure
-        # (_, parms, body) = x
         parms = x[1]
         body = x[2]
         return Procedure.new(self, parms, body, env)
