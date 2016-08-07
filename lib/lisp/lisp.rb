@@ -2,22 +2,40 @@
 # parse(program)
 module Lisp
   class Lisp
-    def repl(prompt = '> ')
-      parser = Parser.new
-      evaluator = Evaluator.new
+    def initialize(input = STDIN, output = STDOUT, prompt = "> ")
+      @input = input
+      @output = output
+      @prompt = prompt
+    end
 
+    def repl
       begin
-        val = evaluator.lisp_eval(parser.parse(raw_input(prompt)))
-        puts schemestr(val)
+        print_prompt
+        val = evaluator
+          .lisp_eval(
+            parser.parse(
+              tokenizer.read_s_expr))
+        output.puts schemestr(val)
       rescue => e
-        puts "Error: #{e}"
-        puts e.backtrace
+        output.puts "Error: #{e}"
+        output.puts e.backtrace
       end while val != :exit
     end
 
-    def raw_input(prompt)
-      print prompt
-      gets.chomp
+    def parser
+      @parser ||= Parser.new
+    end
+
+    def evaluator
+      @evaluator ||= Evaluator.new
+    end
+
+    def tokenizer
+      @tokenizer ||= Tokenizer.new(input)
+    end
+
+    def print_prompt
+      output.print prompt
     end
 
     def schemestr(exp)
@@ -27,5 +45,9 @@ module Lisp
         exp.to_s
       end
     end
+
+    private
+
+    attr_reader :input, :output, :prompt
   end
 end

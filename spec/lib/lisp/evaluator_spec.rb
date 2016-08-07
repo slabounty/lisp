@@ -28,23 +28,6 @@ describe Lisp::Evaluator do
       end
     end
 
-    context "when the array has 'if' as the first element" do
-      let(:if_statement) { [:if, :test, :conseq, :alt] }
-
-      it "evaluates the test"
-
-      context "when the result is true" do
-        it "evaluates the conseq"
-      end
-
-      context "when the result is false" do
-        it "evaluates the alt"
-      end
-    end
-
-    context "when the array has define as the first element" do
-    end
-
     context "when the value is :exit" do
       it "returns exit" do
         expect(subject.lisp_eval([:exit], env)).to eq(:exit)

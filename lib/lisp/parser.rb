@@ -2,17 +2,9 @@ module Lisp
   class Parser
     class LispSyntaxError < StandardError; end
 
-    def parse(program)
+    def parse(tokenized_program)
       # "Read a Scheme expression from a string."
-      read_from_tokens(tokenize(program))
-    end
-
-    def tokenize(program)
-      program
-        .gsub('(', ' ( ')
-        .gsub(')', ' ) ')
-        .split(/\s(?=(?:[^"]|"[^"]*")*$)/)
-        .reject { |t| t.empty? }
+      read_from_tokens(tokenized_program)
     end
 
     def read_from_tokens(tokens)

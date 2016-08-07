@@ -3,35 +3,6 @@ require 'spec_helper'
 describe Lisp::Parser do
   subject { described_class.new }
 
-  describe "#tokenize" do
-    let(:program) { "(begin (define r 10) (* pi (* r r)))" }
-
-    it "tokenizes the program into an array of strings" do
-      expect(subject.tokenize(program)).to eq(["(", "begin", "(", "define", "r", "10", ")", "(", "*", "pi", "(", "*", "r", "r", ")", ")", ")"])
-    end
-
-    context "when the program has quoted strings" do
-      let(:program) { '(list "hello world" "good" "bye")' }
-      it "keeps them as a single token" do
-        expect(subject.tokenize(program)).to eq([
-          "(",
-          "list",
-          '"hello world"',
-          '"good"',
-          '"bye"',
-          ")"
-        ])
-      end
-    end
-  end
-
-  describe "#parse" do
-    let(:program) { "(begin (define r 10) (* pi (* r r)))" }
-    it "parses the program into an array of symbols" do
-      expect(subject.parse(program)).to eq([:begin, [:define, :r, 10], [:*, :pi, [:*, :r, :r]]])
-    end
-  end
-
   describe "#read_from_tokens" do
     context "when the tokens are empty" do
       it "raises a lisp syntax exception" do
@@ -56,7 +27,6 @@ describe Lisp::Parser do
         subject.read_from_tokens(['hello'])
       end
     end
-
   end
 
   describe "#atom" do
