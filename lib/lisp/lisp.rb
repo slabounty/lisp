@@ -19,7 +19,7 @@ module Lisp
       rescue => e
         output.puts "Error: #{e}"
         output.puts e.backtrace
-      end while val != :exit
+      end while true
     end
 
     def parser
