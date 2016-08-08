@@ -12,6 +12,8 @@ describe Lisp::Parser do
 
     context "when the token is a '('" do
       it "returns an array of symbols" do
+        result = subject.read_from_tokens(['(', 'foo', 'bar', ')'])
+        expect(result).to eq([:foo, :bar])
       end
     end
 
