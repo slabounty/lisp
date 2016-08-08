@@ -200,6 +200,18 @@ describe Lisp do
     end
   end
 
+  it "handles true" do
+      string = "true"
+      tokenizer = Lisp::Tokenizer.new(StringIO.new(string))
+      expect(evaluator.lisp_eval(parser.parse(tokenizer.read_s_expr))).to eq(true)
+  end
+
+  it "handles false" do
+      string = "false"
+      tokenizer = Lisp::Tokenizer.new(StringIO.new(string))
+      expect(evaluator.lisp_eval(parser.parse(tokenizer.read_s_expr))).to eq(false)
+  end
+
   it "can perform an if operation" do
     string = "(if (> 3 10) \"y\" \"n\")"
     tokenizer = Lisp::Tokenizer.new(StringIO.new(string))
