@@ -30,6 +30,18 @@ describe Lisp::Parser do
   end
 
   describe "#build_atom" do
+    context "when the token is true" do
+      it "returns the string" do
+        expect(subject.build_atom("true")).to eq(true)
+      end
+    end
+
+    context "when the token is false" do
+      it "returns the string" do
+        expect(subject.build_atom("false")).to eq(false)
+      end
+    end
+
     context "when the token is a quoted string" do
       it "returns the string" do
         expect(subject.build_atom('"hello"')).to eq("hello")

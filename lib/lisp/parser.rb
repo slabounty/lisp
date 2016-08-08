@@ -22,21 +22,22 @@ module Lisp
     end
 
     def build_list(tokens)
-      l = []
+      list = []
       while tokens[0] != ')'
-        l << read_from_tokens(tokens)
+        list << read_from_tokens(tokens)
       end
       tokens.shift # pop off ')'
 
-      return l
+      return list
     end
 
     def build_atom(token)
-      # Stings become strings
-      # Numbers become numbers; 
-      # every other token is a symbol.
+      return true if token == "true"
+      return false if token == "false"
+
       match = /"(.*)"/.match(token)
       return match[1] if match
+
       begin
         return Integer(token)
       rescue
@@ -49,4 +50,3 @@ module Lisp
     end
   end
 end
-

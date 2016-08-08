@@ -27,7 +27,7 @@ module Lisp
 
     def replinish_tokens
       tokens
-        .concat(input.gets.scan(/[()]|[^ \t\r\n\f()]+/))
+        .concat(input.gets.scan(/[()]|"[^"]+"|[^ \t\r\n\f()]+/))
         .map { |t| t != "\n" ? t : " " }
     end
 
