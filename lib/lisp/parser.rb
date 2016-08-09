@@ -17,7 +17,7 @@ module Lisp
       when ')'
         fail LispSyntaxError, 'unexpected )'
       else
-        return build_atom(token)
+        return Atom.build(token)
       end
     end
 
@@ -31,22 +31,5 @@ module Lisp
       return list
     end
 
-    def build_atom(token)
-      return true if token == "true"
-      return false if token == "false"
-
-      match = /"(.*)"/.match(token)
-      return match[1] if match
-
-      begin
-        return Integer(token)
-      rescue
-        begin
-          return Float(token)
-        rescue
-          return token.to_sym
-        end
-      end
-    end
   end
 end
