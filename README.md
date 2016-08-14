@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/slabounty/lisp.svg?branch=master)](https://travis-ci.org/slabounty/lisp)
+[![Coverage Status](https://coveralls.io/repos/slabounty/lisp/badge.png?branch=master)](https://coveralls.io/r/slabounty/lisp?branch=master)
 # Lisp
 
 > A Simple Lisp Interpreter
