@@ -20,6 +20,10 @@ module Lisp
         var = x[1]
         exp = x[2]
         env[var] = lisp_eval(exp, env)
+      elsif x[0] == :or
+        x[1..-1].each { |exp| return true if lisp_eval(exp, env) != false }; return false
+      elsif x[0] == :and
+        x[1..-1].each { |exp| return false if lisp_eval(exp, env) == false }; return true
       elsif x[0] == :lambda         # procedure
         parms = x[1]
         body = x[2]

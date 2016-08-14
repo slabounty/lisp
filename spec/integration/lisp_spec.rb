@@ -229,4 +229,40 @@ describe Lisp do
     tokenizer = Lisp::Tokenizer.new(StringIO.new(string))
     expect(evaluator.lisp_eval(parser.parse(tokenizer.read_s_expr))).to eq([7, 9, 11])
   end
+
+  context "or operation" do
+    context "when the or is true" do
+      it "returns true" do
+        string = "(or (= 2 2) (< 2 1))"
+        tokenizer = Lisp::Tokenizer.new(StringIO.new(string))
+        expect(evaluator.lisp_eval(parser.parse(tokenizer.read_s_expr))).to eq(true)
+      end
+    end
+
+    context "when the or is false" do
+      it "returns false" do
+        string = "(or (< 3 2) (< 2 1))"
+        tokenizer = Lisp::Tokenizer.new(StringIO.new(string))
+        expect(evaluator.lisp_eval(parser.parse(tokenizer.read_s_expr))).to eq(false)
+      end
+    end
+  end
+
+  context "and operation" do
+    context "when the and is true" do
+      it "returns true" do
+        string = "(and (= 2 2) (> 2 1))"
+        tokenizer = Lisp::Tokenizer.new(StringIO.new(string))
+        expect(evaluator.lisp_eval(parser.parse(tokenizer.read_s_expr))).to eq(true)
+      end
+    end
+
+    context "when the and is false" do
+      it "returns false" do
+        string = "(and (< 3 2) (< 2 1))"
+        tokenizer = Lisp::Tokenizer.new(StringIO.new(string))
+        expect(evaluator.lisp_eval(parser.parse(tokenizer.read_s_expr))).to eq(false)
+      end
+    end
+  end
 end
