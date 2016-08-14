@@ -12,6 +12,8 @@ module Lisp
           list?: lambda { |l| l.is_a? Array },
           length: lambda { |l| l.length },
 
+          map: lambda { |f, *l|  (l.length == 1) ? l[0].map { |p| f.call(p) } : l[0].zip(*l[1..-1]).map { |p| f.call(*p) } },
+
           abs: lambda { |x| x.abs },
           min: lambda { |l| l.min },
           max: lambda { |l| l.max },
