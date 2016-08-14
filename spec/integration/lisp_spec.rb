@@ -201,20 +201,32 @@ describe Lisp do
   end
 
   it "handles true" do
-      string = "true"
-      tokenizer = Lisp::Tokenizer.new(StringIO.new(string))
-      expect(evaluator.lisp_eval(parser.parse(tokenizer.read_s_expr))).to eq(true)
+    string = "true"
+    tokenizer = Lisp::Tokenizer.new(StringIO.new(string))
+    expect(evaluator.lisp_eval(parser.parse(tokenizer.read_s_expr))).to eq(true)
   end
 
   it "handles false" do
-      string = "false"
-      tokenizer = Lisp::Tokenizer.new(StringIO.new(string))
-      expect(evaluator.lisp_eval(parser.parse(tokenizer.read_s_expr))).to eq(false)
+    string = "false"
+    tokenizer = Lisp::Tokenizer.new(StringIO.new(string))
+    expect(evaluator.lisp_eval(parser.parse(tokenizer.read_s_expr))).to eq(false)
   end
 
   it "can perform an if operation" do
     string = "(if (> 3 10) \"y\" \"n\")"
     tokenizer = Lisp::Tokenizer.new(StringIO.new(string))
     expect(evaluator.lisp_eval(parser.parse(tokenizer.read_s_expr))).to eq("n")
+  end
+
+  it "can perform a map operation" do
+    string = "(map (lambda(x) (+ x 1)) (list 5 6 7))"
+    tokenizer = Lisp::Tokenizer.new(StringIO.new(string))
+    expect(evaluator.lisp_eval(parser.parse(tokenizer.read_s_expr))).to eq([6, 7, 8])
+  end
+
+  it "can perform a map operation" do
+    string = "(map add (list 2 3 4) (list 5 6 7))"
+    tokenizer = Lisp::Tokenizer.new(StringIO.new(string))
+    expect(evaluator.lisp_eval(parser.parse(tokenizer.read_s_expr))).to eq([7, 9, 11])
   end
 end
