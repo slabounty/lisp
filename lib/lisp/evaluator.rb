@@ -16,6 +16,11 @@ module Lisp
         _, test, conseq, alt = x
         exp = lisp_eval(test, env) ? conseq : alt
         return lisp_eval(exp, env)
+      elsif x[0] == :cond
+        x[1..-1].each do |test, exp|
+          return lisp_eval(exp, env) if test == :else
+          return lisp_eval(exp, env) if lisp_eval(test, env)
+        end
       elsif x[0] == :define         # (define var exp)
         var = x[1]
         exp = x[2]
