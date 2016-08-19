@@ -248,6 +248,41 @@ describe Lisp do
     end
   end
 
+  context "cond statement" do
+    context "when the first conditional is true" do
+      it "returns the first expression" do
+        string =
+          "(cond ((> 3 1) \"greater\")
+                 ((< 3 3) \"less\")
+                 (else \"equal\"))"
+        tokenizer = Lisp::Tokenizer.new(StringIO.new(string))
+        expect(evaluator.lisp_eval(parser.parse(tokenizer.read_s_expr))).to eq('greater')
+      end
+    end
+
+    context "when the second conditional is true" do
+      it "returns the second expression" do
+        string =
+          "(cond ((< 3 1) \"greater\")
+                 ((< 3 4) \"less\")
+                 (else \"equal\"))"
+        tokenizer = Lisp::Tokenizer.new(StringIO.new(string))
+        expect(evaluator.lisp_eval(parser.parse(tokenizer.read_s_expr))).to eq('less')
+      end
+    end
+
+    context "when neither conditional is true" do
+      it "returns the else expression" do
+        string =
+          "(cond ((> 3 3) \"greater\")
+                 ((< 3 3) \"less\")
+                 (else \"equal\"))"
+        tokenizer = Lisp::Tokenizer.new(StringIO.new(string))
+        expect(evaluator.lisp_eval(parser.parse(tokenizer.read_s_expr))).to eq('equal')
+      end
+    end
+  end
+
   context "and operation" do
     context "when the and is true" do
       it "returns true" do
