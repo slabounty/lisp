@@ -2,6 +2,7 @@ module Lisp
   class Tokenizer
     def initialize(input=STDIN)
       @input = input
+      @tokens = []
     end
 
     def read_s_expr
@@ -19,24 +20,20 @@ module Lisp
     end
 
     def get_token
-      while tokens == []
-        replinish_tokens
-      end
+      replinish_tokens while tokens == []
       tokens.shift
     end
 
     def replinish_tokens
       tokens
-        .concat(input.gets.scan(/[()]|"[^"]+"|[^ \t\r\n\f()]+/))
+        .concat(input
+                .gets
+                .sub(/;.*$/, '').scan(/[()]|"[^"]+"|[^ \t\r\n\f()]+/))
         .map { |t| t != "\n" ? t : " " }
-    end
-
-    def tokens
-      @tokens ||= []
     end
 
     private
 
-    attr_reader :input
+    attr_reader :input, :tokens
   end
 end
