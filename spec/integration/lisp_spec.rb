@@ -300,4 +300,10 @@ describe Lisp do
       end
     end
   end
+
+  it "can remove comments" do
+    string = "(add 10 ; remove this\n3 ; and this\n)"
+    tokenizer = Lisp::Tokenizer.new(StringIO.new(string))
+    expect(evaluator.lisp_eval(parser.parse(tokenizer.read_s_expr))).to eq(13)
+  end
 end
