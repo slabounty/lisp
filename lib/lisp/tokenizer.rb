@@ -20,11 +20,11 @@ module Lisp
     end
 
     def get_token
-      replinish_tokens while tokens == []
+      replenish_tokens while tokens == []
       tokens.shift
     end
 
-    def replinish_tokens
+    def replenish_tokens
       tokens
         .concat(input
                 .gets
