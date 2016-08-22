@@ -20,16 +20,35 @@ module Lisp
     end
 
     def get_token
-      replenish_tokens while tokens == []
-      tokens.shift
-    end
-
-    def replenish_tokens
-      tokens
-        .concat(input
-                .gets
-                .sub(/;.*$/, '').scan(/[()]|"[^"]+"|[^ \t\r\n\f()]+/))
-        .map { |t| t != "\n" ? t : " " }
+      token = ''
+      while true
+        c = input.getc
+        case c
+        when '"' # quoted string
+          token << c
+          while (c = input.getc) != '"' do
+            token << c
+          end
+          token << c
+          return token
+        when ';' # Comment, delete to eol
+          input.gets
+          return token if token != ''
+        when /[()]/ # open / close paren
+          if token != ''
+            input.ungetc c
+            return token
+          else
+            return c
+          end
+        when /\s/ # white space
+          return token if token != ''
+        when nil # eof essentially
+          return token if token != ''
+        else # anything else
+          token << c
+        end
+      end
     end
 
     private
