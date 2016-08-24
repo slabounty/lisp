@@ -201,13 +201,13 @@ describe Lisp do
   end
 
   it "handles true" do
-    string = "true"
+    string = "#t"
     tokenizer = Lisp::Tokenizer.new(StringIO.new(string))
     expect(evaluator.lisp_eval(parser.parse(tokenizer.read_s_expr))).to eq(true)
   end
 
   it "handles false" do
-    string = "false"
+    string = "#f"
     tokenizer = Lisp::Tokenizer.new(StringIO.new(string))
     expect(evaluator.lisp_eval(parser.parse(tokenizer.read_s_expr))).to eq(false)
   end

@@ -4,13 +4,13 @@ describe Lisp::Atom do
   describe ".build" do
     context "when the token is true" do
       it "returns the string" do
-        expect(described_class.build("true")).to eq(true)
+        expect(described_class.build("#t")).to eq(true)
       end
     end
 
     context "when the token is false" do
       it "returns the string" do
-        expect(described_class.build("false")).to eq(false)
+        expect(described_class.build("#F")).to eq(false)
       end
     end
 
