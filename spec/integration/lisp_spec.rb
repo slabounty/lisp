@@ -306,4 +306,24 @@ describe Lisp do
     tokenizer = Lisp::Tokenizer.new(StringIO.new(string))
     expect(evaluator.lisp_eval(parser.parse(tokenizer.read_s_expr))).to eq(13)
   end
+
+  it "handles quote a)" do
+    string =  "(quote a b c)" 
+    tokenizer = Lisp::Tokenizer.new(StringIO.new(string))
+    expect(evaluator.lisp_eval(parser.parse(tokenizer.read_s_expr))).to eq([:a, :b, :c])
+  end
+
+  context "when there's a single quote" do
+    it "handles quote b)" do
+      string =  "'(a b c)" 
+      tokenizer = Lisp::Tokenizer.new(StringIO.new(string))
+      expect(evaluator.lisp_eval(parser.parse(tokenizer.read_s_expr))).to eq([:a, :b, :c])
+    end
+
+    it "handles quote b)" do
+      string =  "'b" 
+      tokenizer = Lisp::Tokenizer.new(StringIO.new(string))
+      expect(evaluator.lisp_eval(parser.parse(tokenizer.read_s_expr))).to eq(:b)
+    end
+  end
 end
