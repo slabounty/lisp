@@ -12,6 +12,8 @@ module Lisp
         return x
       elsif x[0] == :quote          # (quote exp)
         return x[1..-1]
+      elsif x[0] == "'"             # (quote exp)
+        return x[1]
       elsif x[0] == :if             # (if test conseq alt)
         _, test, conseq, alt = x
         exp = lisp_eval(test, env) ? conseq : alt

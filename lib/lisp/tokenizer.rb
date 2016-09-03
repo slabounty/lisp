@@ -14,7 +14,7 @@ module Lisp
         s_expr << token
         paren_count += 1 if token == '('
         paren_count -= 1 if token == ')'
-      end while (paren_count != 0)
+      end while (paren_count != 0) || token == "'"
 
       return s_expr
     end
@@ -41,6 +41,8 @@ module Lisp
           else
             return c
           end
+        when "'"
+          return c
         when /\s/ # white space
           return token if token != ''
         when nil # eof essentially

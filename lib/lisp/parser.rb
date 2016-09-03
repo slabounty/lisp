@@ -16,6 +16,8 @@ module Lisp
         return build_list(tokens)
       when ')'
         fail LispSyntaxError, 'unexpected )'
+      when '\''
+        return ["'"] << read_from_tokens(tokens)
       else
         return Atom.build(token)
       end
